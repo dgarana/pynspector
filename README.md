@@ -1,0 +1,2 @@
+# pynspector
+Python Objects inspector
