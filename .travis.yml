@@ -1,0 +1,27 @@
+sudo: false
+language: python
+matrix:
+  include:
+  - name: Python 2.7 Unit Test
+    python: '2.7'
+  - name: Python 3.4 Unit Test
+    python: '3.4'
+  - name: Python 3.5 Unit Test
+    python: '3.5'
+  - name: Python 3.6 Unit Test
+    python: '3.6'
+  - name: Python 3.7 Unit Test
+    python: '3.7'
+    dist: xenial
+    sudo: true
+script: tox
+install: pip install tox-travis codecov
+deploy:
+  skip_existing: true
+  provider: pypi
+  user: dgarana
+  password:
+    secure: rwfAKX8Gstun6Wf4Y8O+UuFGXcO/xgZ0vL3vc3rFEMI/QPKeQSnDFFhq7Qu9AXlFt7K4oHQaWR6V27UlSM0eqAW4T7o7c6J2kXonO+LkTU2pIaAfXsKcGZv3kVgMha7/Lfm90nUnrvHFD4pptSRxoPYOPzZuQTZtw8Op9GL++fJciA0NRlrk2j/MWLYzMQeLtjjfTow4RZOfafYBwGo0X6OWQGEElO86gVEPOP7CTvIlj6UGBbrZjP4YTMXdeFt9C4mOtrIg2clqGqryeXZUSVVX2OItePlVR0TuyCmwCfH3ijo07QVzQPhu1ysK1ubYZqBa875ZJBdFd/C3o4qaBVwks0by7FqHSswdk3s0cRM8pNtWNc+UPMjatVqu+oPtDDWWDa2zTTKxxuKbs/UuxHFh/puJA5VYEgU68KDH6sJXL80cVSRsZcpSG5elsg1FAZ2tH0BuXVDNaQTrrYECMN9MrEzP9JJbHAUbQzDKRlXGI83p3yDu8Elku84FwHeAyHww5+FFVEsa96RRxGpbgKtWf72Z17uPV/qqr8cjmCSrWbGzyjALOWcUCcv5IzTFWoBCCYSA19QvvKOUhh9KAyFjg91h0yjAH1TttcZ/aIcFrWAbnOZX25DQMTq/PT8ybm1HfyipJ7DOar2sYMVrx+Nbq5tFMShglJue2PnY1sQ=
+  on:
+    tags: true
+    repo: dgarana/pynspector
