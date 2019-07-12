@@ -6,6 +6,7 @@ Main module for inspecting functions
 """
 # System imports
 import inspect
+import six
 
 # Third-party imports
 # Local imports
@@ -32,7 +33,12 @@ def get_default_args(func):
     :return: Dictionary with argument as key and default value as value
     :rtype: dict
     """
-    args, varargs, keywords, defaults = inspect.getargspec(func)
+    if six.PY3:
+        func_sign = inspect.signature(func)
+        return {param.name: param.default
+                for param in func_sign.parameters.values()
+                if param.default is not inspect._empty}
+    args, _, _, defaults = inspect.getargspec(func)
     if not defaults:
         return {}
     return dict(zip(args[-len(defaults):], defaults))
@@ -51,6 +57,9 @@ def get_function_args(func):
     :return: List of arguments
     :rtype: list
     """
+    if six.PY3:
+        func_sign = inspect.signature(func)
+        return list(func_sign.parameters.keys())
     arg_spec = inspect.getargspec(func)
     return arg_spec.args
 
